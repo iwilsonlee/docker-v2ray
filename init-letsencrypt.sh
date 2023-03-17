@@ -43,6 +43,9 @@ echo "       return 301 https://\$host\$request_uri;"  >> ./data/nginx/conf.d/v2
 echo "   }"   >> ./data/nginx/conf.d/v2ray.conf
 echo "}" >> ./data/nginx/conf.d/v2ray.conf
 
+sed -i "s|your_domain/|$domains|g" ./data/nginx/conf.d/v2ray.conf
+sed -i "s|your_domain/|$domains|g" ./data/trojan-go/server.json
+
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
 docker-compose run --rm --entrypoint "\

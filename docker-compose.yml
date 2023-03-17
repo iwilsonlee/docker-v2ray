@@ -39,3 +39,13 @@ services:
       - ./logs/v2ray:/var/log/v2ray
     expose:
       - "30909" #开放端口给容器，不对外开放
+  trojan-go:
+    image: teddysun/trojan-go:latest
+    container_name: trojan-go
+    restart: always
+    ports:
+      - "5043:443"
+    volumes:
+      - ./data/trojan-go/server.json:/etc/trojan-go/server.json
+      - ./data/certbot/conf:/opt/crt/
+    command: /usr/bin/trojan-go -config /etc/trojan-go/server.json
